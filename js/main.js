@@ -12,7 +12,7 @@ let minScale = 1;
 let maxScale = 3;
 
 let offsetX = -250;
-let offsetY = -150;
+let offsetY = -150; 
 
 let lastTouchX, lastTouchY;
 let startX = 0;
@@ -25,7 +25,11 @@ let pinRadius = 20;
 // Se obtienen los elementos del info box
 const infoBoxTitle = document.getElementById("txtTitle");
 const infoBox = document.getElementById("txtText");
-const infoBoxLink = document.getElementById("txtLink");
+const infoSecondBox = document.getElementById("txtSecon");
+const imgBox = document.getElementById("imgBox");
+
+imgBox.style.visibility="hidden"
+
 
 // Se crea un arreglo con la información de los marcadores del mapa
 const locations = [
@@ -35,7 +39,9 @@ const locations = [
     name: "Barrio el charco",
     href: "lugar.html#ciudad-de-lagrimas",
     info: "Barrio en Ipiales, Nariño, Colombia, que se encuentra en la frontera con Ecuador y es la puerta de entrada a la vía que conduce directamente al Santuario de Nuestra Señora de Las Lajas. Es un lugar colorido que resalta la cultura y la tradición de los pueblos nariñenses, plasmadas en las fachadas de las casas y plazuelas que fueron pintadas con la asesoría y diseños del maestro nariñense Carlos Santacruz.",
-    location: "../img/cuy.png"
+    infosecon: "Hay 2 maneras de llegar desde Ipiales hasta El Chaco en autobús o en coche",
+    location: "../img/cuy.png",
+    imgBox: "../img/charco.png"
   },
   {
     x: 590,
@@ -43,7 +49,10 @@ const locations = [
     name: "Santuario",
     href: "lugar.html#ciudad-de-lagrimas",
     info: "El Santuario de Las Lajas se encuentra en la carretera Panamericana a 7 kilómetros al norte de la ciudad de Ipiales, Nariño. Desde Ipiales parten buses y taxis colectivos hasta el templo.",
-    location: "../img/iglesia.png"
+    infosecon: "Horarios:  El horario de visita es desde las 6 am a las 7 pm.",
+    location: "../img/iglesia.png",
+    imgBox: "../img/lajas.png"
+
   },
   {
     x: 250,
@@ -51,7 +60,9 @@ const locations = [
     name: "Centro",
     href: "lugar.html#ciudad-de-lagrimas",
     info: "Para llegar al centro de la ciudad de Ipiales, puedes utilizar diferentes medios de transporte como autobuses, taxis o caminar si estás cerca.",
-    location: "../img/ciudad.png"
+    infosecon: "Si vienes desde otra ciudad, puedes llegar en autobús a la terminal de Ipiales y desde allí tomar un taxi o un autobús local que te lleve al centro de la ciudad.",
+    location: "../img/ciudad.png",
+    imgBox: "../img/parque.png"
   }
 ];
 
@@ -205,7 +216,9 @@ canvas.addEventListener("click", function (e) {
   if (clickedPin) {
     infoBoxTitle.innerHTML = clickedPin.name;
     infoBox.innerHTML = clickedPin.info;
-    infoBoxLink.href = clickedPin.href;
+    infoSecondBox.innerHTML = clickedPin.infosecon;
+    imgBox.src = clickedPin.imgBox
+    imgBox.style.visibility="visible"
   }
 });
 
@@ -268,7 +281,8 @@ canvas.addEventListener("touchend", function (e) {
   if (clickedPin) {
     infoBoxTitle.innerHTML = clickedPin.name;
     infoBox.innerHTML = clickedPin.info;
-    infoBoxLink.href = clickedPin.href;
-    infoBoxLink.innerHTML = "...ver más";
+    infoSecondBox.innerHTML = clickedPin.infosecon;
+    imgBox.src = clickedPin.imgBox
+    imgBox.style.visibility="visible"
   }
 });
